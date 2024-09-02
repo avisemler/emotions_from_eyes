@@ -1,16 +1,18 @@
 import base64
 import csv
+import random
 
 import anthropic
 from PIL import Image
 
-SECRET_KEY = "[ADD SECRET KEY HERE]"
+SECRET_KEY = "[INSERT SECRET KEY HERE]"
 
 client = anthropic.Anthropic(
     api_key=SECRET_KEY,
 )
 
-def get_label(image_path, label_options, file_format="img/jpeg"):
+def get_label(image_path, label_options, file_format="image/jpeg"):
+    random.shuffle(label_options)
     prompt = "Please judge what emotion is shown in this image, out of the following options: "
     prompt += ", ".join(label_options)
     prompt += ". Answer with only single word! If you are unsure, guess."
